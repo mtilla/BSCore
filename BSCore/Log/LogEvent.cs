@@ -13,7 +13,7 @@ namespace BSCore.Log
     {
         public string Message { get; set; }
         public Level LogLevel { get; set; }
-        public DateTime Timestamp { get; set; }
+        public DateTime Timestamp { get; set; } = DateTime.Now;
     }
 
 
