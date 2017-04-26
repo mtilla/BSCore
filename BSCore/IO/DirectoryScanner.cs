@@ -8,7 +8,7 @@ using BSCore.IO.Input;
 namespace BSCore.IO
 {
 
-    public class DirectoryScanner : IInputManager
+    public class DirectoryScanner : IInputConnector
     {
         private FileSystemWatcher Watcher;
         public string Path { get; set; }
@@ -67,7 +67,7 @@ namespace BSCore.IO
                 case WatcherChangeTypes.Created:
                     // new File
                     //Send event to eventhandler
-                    EventHandler.InputReceived(new InputEvent(CreateEventArgs(e)));
+                    EventHandler.HandleEvent(new InputEvent(CreateEventArgs(e)));
                     break;
             }
         }
@@ -90,7 +90,7 @@ namespace BSCore.IO
         {
             InputEventArgs eventArgs = new InputEventArgs();
             eventArgs.EventType = InputEventType.Created; // Set dynamic later
-            eventArgs.Path = eventArgs.Path;
+            eventArgs.Path = args.FullPath;
             return eventArgs;
         }
     }

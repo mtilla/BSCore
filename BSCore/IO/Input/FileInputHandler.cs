@@ -8,10 +8,13 @@ namespace BSCore.IO.Input
 {
     class FileInputHandler : IInputEventHandler
     {
-        public void InputReceived(InputEvent inputEvent)
+        public void HandleEvent(InputEvent inputEvent)
         {
             // Do stuff
             // ANd forward to next
+            Console.WriteLine(inputEvent.Timestamp + ": " + inputEvent.ID);
+            Console.WriteLine(inputEvent.Args.EventType + ": " + inputEvent.Args.Path);
+
         }
     }
 }

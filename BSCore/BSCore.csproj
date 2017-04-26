@@ -44,12 +44,12 @@
     <Compile Include="CoreManager.cs" />
     <Compile Include="Error\Error.cs" />
     <Compile Include="Error\ErrorManager.cs" />
-    <Compile Include="IO\Output\IOutputManager.cs" />
+    <Compile Include="IO\Output\IOutputConnector.cs" />
     <Compile Include="IO\DirectoryScanner.cs" />
     <Compile Include="IO\FileOperations.cs" />
     <Compile Include="IO\FilePattern.cs" />
     <Compile Include="IO\Input\FileInputHandler.cs" />
-    <Compile Include="IO\Input\IInputManager.cs" />
+    <Compile Include="IO\Input\IInputConnector.cs" />
     <Compile Include="IO\IOManager.cs" />
     <Compile Include="Log\LogEvent.cs" />
     <Compile Include="Log\LogManager.cs" />

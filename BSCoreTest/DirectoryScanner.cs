@@ -12,8 +12,8 @@ namespace BSCoreTest
         {
             
             String scanPath = "C:\\Scanner";
-            BSCore.IO.IOManager ioManager = new BSCore.IO.IOManager();
-            
+            BSCore.IO.IOManager scanner = new BSCore.IO.IOManager();
+            Thread.Sleep(1000 * 15);
         }
     }
 }

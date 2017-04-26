@@ -10,19 +10,20 @@ namespace BSCore.IO
 {
     public class IOManager
     {
-        private IInputManager InputManager;
-        private IOutputManager OutputManager;
+        private IInputConnector InputConnector;
+        private IOutputConnector OutputConnector;
         public IOManager()
         {
-            InputManager = new DirectoryScanner("C:\\Scanner");
+            InputConnector = new DirectoryScanner("C:\\Scanner");
             FileInputHandler inputHandler = new FileInputHandler();
-            InputManager.RegisterEventHandler(inputHandler);
+            InputConnector.RegisterEventHandler(inputHandler);
+            InputConnector.Start();
         }
 
-        public IOManager(IInputManager inputManager, IOutputManager outputManager)
+        public IOManager(IInputConnector inConnector, IOutputConnector outConnector)
         {
-            InputManager = inputManager;
-            OutputManager = outputManager;
+            InputConnector = inConnector;
+            OutputConnector = outConnector;
         }
     }
 }

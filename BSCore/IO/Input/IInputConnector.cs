@@ -11,7 +11,7 @@ namespace BSCore.IO.Input
     /// Implementers are responsible for deleting/moving/copying files in case of DirScans/FileSystemWatchers
     /// And provide Data if available
     /// </summary>
-    public interface IInputManager
+    public interface IInputConnector
     {
         /// <summary>
         /// Start this Handler to handle/scan input events
@@ -30,7 +30,7 @@ namespace BSCore.IO.Input
 
     public interface IInputEventHandler
     {
-        void InputReceived(InputEvent inputEvent);
+        void HandleEvent(InputEvent inputEvent);
         
     }
 
