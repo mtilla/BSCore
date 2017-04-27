@@ -8,12 +8,12 @@ using BSCore.IO.Input;
 namespace BSCore.IO
 {
 
-    public class DirectoryScanner : IInputConnector
+    public class DirectoryScanner : IInputConnector, IDisposable
     {
-        private FileSystemWatcher Watcher;
+        private FileSystemWatcher _watcher;
         public string Path { get; set; }
         public string Filter { get; set; } = "*.*";
-        private IInputEventHandler EventHandler;
+        private IInputEventHandler _eventHandler;
         public DirectoryScanner(String directory)
         {
             Path = directory;
@@ -26,13 +26,13 @@ namespace BSCore.IO
         private void InitWatcher()
         {
             //Create new
-            Watcher = new FileSystemWatcher(Path);
+            _watcher = new FileSystemWatcher(Path);
             //Events
-            Watcher.Created += WatcherOnCreated;
+            _watcher.Created += WatcherOnCreated;
 
             //Filters
             
-            Watcher.Filter = Filter;
+            _watcher.Filter = Filter;
             //Inits
         }
 
@@ -42,8 +42,8 @@ namespace BSCore.IO
         public void Start()
         {
             // Check path exists and handle error
-            if (Watcher == null) { InitWatcher(); }
-            Watcher.EnableRaisingEvents = true;
+            if (_watcher == null) { InitWatcher(); }
+            _watcher.EnableRaisingEvents = true;
         }
         
         /// <summary>
@@ -51,8 +51,8 @@ namespace BSCore.IO
         /// </summary>
         public void Stop()
         {
-            Watcher.EnableRaisingEvents = false;
-            Watcher.Dispose();
+            _watcher.EnableRaisingEvents = false;
+            _watcher.Dispose();
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace BSCore.IO
                 case WatcherChangeTypes.Created:
                     // new File
                     //Send event to eventhandler
-                    EventHandler.HandleEvent(new InputEvent(CreateEventArgs(e)));
+                    _eventHandler.HandleEvent(new InputEvent(CreateEventArgs(e)));
                     break;
             }
         }
@@ -78,7 +78,7 @@ namespace BSCore.IO
         /// <param name="inputEventHandler">The eventhandler to notify</param>
         public void RegisterEventHandler(IInputEventHandler inputEventHandler)
         {
-            EventHandler = inputEventHandler;
+            _eventHandler = inputEventHandler;
         }
 
         /// <summary>
@@ -93,5 +93,40 @@ namespace BSCore.IO
             eventArgs.Path = args.FullPath;
             return eventArgs;
         }
+
+        #region IDisposable Support
+        private bool _disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects).
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                _disposedValue = true;
+            }
+        }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        // ~DirectoryScanner() {
+        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        //   Dispose(false);
+        // }
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }

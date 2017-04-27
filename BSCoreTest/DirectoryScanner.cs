@@ -11,7 +11,7 @@ namespace BSCoreTest
         public void DirScanTest()
         {
             
-            String scanPath = "C:\\Scanner";
+            //String scanPath = "C:\\Scanner";
             BSCore.IO.IOManager scanner = new BSCore.IO.IOManager();
             Thread.Sleep(1000 * 15);
         }

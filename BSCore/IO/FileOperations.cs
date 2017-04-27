@@ -31,14 +31,14 @@ namespace BSCore.IO
         /// <summary>
         /// Determine if file is in use and wait for it until it is completed.
         /// </summary>
-        /// <param name="FilePath"></param>
+        /// <param name="filePath"></param>
         /// <returns></returns>
-        public static bool FileIsReady(string FilePath)
+        public static bool FileIsReady(string filePath)
         {
             try
             {
-                if (File.Exists(FilePath))
-                    using (File.OpenRead(FilePath))
+                if (File.Exists(filePath))
+                    using (File.OpenRead(filePath))
                     {
                         return true;
                     }
@@ -50,7 +50,7 @@ namespace BSCore.IO
             #pragma warning restore CS0168 // Variable is declared but never used
             {
                 Thread.Sleep(1000);
-                return FileIsReady(FilePath);
+                return FileIsReady(filePath);
             }
         }
 

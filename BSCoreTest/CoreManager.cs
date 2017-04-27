@@ -1,29 +1,28 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BSCoreTest
 {
     [TestClass]
     public class CoreManager
     {
-        private BSCore.CoreManager manager;
+        private BSCore.CoreManager _manager;
         [TestInitialize]
         public void TestInit()
         {
-            manager = new BSCore.CoreManager();
+            _manager = new BSCore.CoreManager();
 
         }
         [TestCleanup]
         public void TestCleanup()
         {
-            manager = null;
-            Assert.IsNull(manager);
+            _manager = null;
+            Assert.IsNull(_manager);
         }
 
         [TestMethod]
         public void TestMethod1()
         {
-            Assert.IsNotNull(manager);
+            Assert.IsNotNull(_manager);
         }
     }
 }

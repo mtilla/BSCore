@@ -8,18 +8,18 @@ namespace BSCoreTest
     [TestClass]
     public class ErrorManager
     {
-        BSCore.Error.ErrorManager manager;
+        BSCore.Error.ErrorManager _manager;
         [TestInitialize]
         public void TestInit()
         {
-            manager = new BSCore.Error.ErrorManager(new BSCore.CoreManager());
+            _manager = new BSCore.Error.ErrorManager(new BSCore.CoreManager());
 
         }
         [TestCleanup]
         public void TestCleanup()
         {
-            manager = null;
-            Assert.IsNull(manager);
+            _manager = null;
+            Assert.IsNull(_manager);
         }
 
         [TestMethod]

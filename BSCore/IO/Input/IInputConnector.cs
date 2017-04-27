@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BSCore.IO.Input
+﻿namespace BSCore.IO.Input
 {
     /// <summary>
     /// Manager for monitoring incoming events of interest.

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BSCore.IO.Input
 {
@@ -12,7 +8,7 @@ namespace BSCore.IO.Input
         {
             // Do stuff
             // ANd forward to next
-            Console.WriteLine(inputEvent.Timestamp + ": " + inputEvent.ID);
+            Console.WriteLine(inputEvent.Timestamp + ": " + inputEvent.Id);
             Console.WriteLine(inputEvent.Args.EventType + ": " + inputEvent.Args.Path);
 
         }
