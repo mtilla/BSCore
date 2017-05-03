@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 
 namespace BSCore
 {
-    /// <summary>
-    /// Base class for adding ID and Timestamp to objects
-    /// </summary>
-    public class BaseEntity
+    public abstract class BaseEvent
     {
+        /// <summary>
+        /// Unique identifier
+        /// </summary>
         public Guid Id { get; set; } = Guid.NewGuid();
+
+
+        /// <summary>
+        /// Timestamp of the event
+        /// </summary>
         public DateTime Timestamp { get; set; } = DateTime.Now;
 
-        public override string ToString()
-        {
-            return Id.ToString();
-        }
     }
 }

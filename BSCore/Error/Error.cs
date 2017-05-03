@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BSCore.Error
 {
@@ -55,4 +51,7 @@ namespace BSCore.Error
         /// </summary>
         Severe
     }
+
+    //TODO: Implement Error messages
+    //TODO: Implement Translation Library
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BSCore.Error
+﻿namespace BSCore.Error
 {
     public class ErrorManager
     {
@@ -22,6 +16,5 @@ namespace BSCore.Error
         {
             // Do something with error
         }
-
     }
 }

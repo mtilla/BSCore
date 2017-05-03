@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BSCore.IO.Input;
-namespace BSCore.IO
+
+namespace BSCore.IO.Input
 {
 
     public class DirectoryScanner : IInputConnector, IDisposable
@@ -13,7 +10,12 @@ namespace BSCore.IO
         private FileSystemWatcher _watcher;
         public string Path { get; set; }
         public string Filter { get; set; } = "*.*";
+        public Boolean BackupOriginal = false;
         private IInputEventHandler _eventHandler;
+        /// <summary>
+        /// Empty Constructor - Set params manually
+        /// </summary>
+        public DirectoryScanner() { }
         public DirectoryScanner(String directory)
         {
             Path = directory;
@@ -31,7 +33,9 @@ namespace BSCore.IO
             _watcher.Created += WatcherOnCreated;
 
             //Filters
-            
+
+            //Settings
+
             _watcher.Filter = Filter;
             //Inits
         }
@@ -45,7 +49,7 @@ namespace BSCore.IO
             if (_watcher == null) { InitWatcher(); }
             _watcher.EnableRaisingEvents = true;
         }
-        
+
         /// <summary>
         /// Stop listening to events and Dispose the watcher.
         /// </summary>
@@ -67,7 +71,26 @@ namespace BSCore.IO
                 case WatcherChangeTypes.Created:
                     // new File
                     //Send event to eventhandler
-                    _eventHandler.HandleEvent(new InputEvent(CreateEventArgs(e)));
+                    // Logga file received
+                    InputEvent inEvent = new InputEvent(CreateEventArgs(e, IOEventType.Created));
+                    BackgroundWorker worker = new BackgroundWorker();
+                    _eventHandler.HandleEvent(inEvent, worker);
+
+                    //Logga dirscan stage complete
+
+                    //Remove file
+                    // Worker
+                    worker.RunWorkerCompleted += (o, args) =>
+                    {
+                        if (BackupOriginal)
+                        {
+                            FileOperations.BackupFile(inEvent.Args.Path);
+                        }
+                        else
+                        {
+                            File.Delete(inEvent.Args.Path);
+                        }
+                    };
                     break;
             }
         }
@@ -85,12 +108,16 @@ namespace BSCore.IO
         /// Convert System eventargs to InputEventArgs
         /// </summary>
         /// <param name="args">Original event args</param>
+        /// <param name="eventType"></param>
         /// <returns></returns>
-        private InputEventArgs CreateEventArgs(FileSystemEventArgs args)
+        private InputEventArgs CreateEventArgs(FileSystemEventArgs args, IOEventType eventType)
         {
-            InputEventArgs eventArgs = new InputEventArgs();
-            eventArgs.EventType = InputEventType.Created; // Set dynamic later
-            eventArgs.Path = args.FullPath;
+            InputEventArgs eventArgs = new InputEventArgs
+            {
+                IOEventType = eventType,
+                Path = args.FullPath
+            };
+            // Set dynamic later
             return eventArgs;
         }
 
@@ -103,12 +130,10 @@ namespace BSCore.IO
             {
                 if (disposing)
                 {
-                    // TODO: dispose managed state (managed objects).
+                    Stop();
                 }
 
-                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-                // TODO: set large fields to null.
-
+                Stop();
                 _disposedValue = true;
             }
         }
@@ -128,5 +153,7 @@ namespace BSCore.IO
             // GC.SuppressFinalize(this);
         }
         #endregion
+
+        public delegate Boolean CreateOutput(InputEvent inputEvent);
     }
 }

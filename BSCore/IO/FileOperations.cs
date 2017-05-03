@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace BSCore.IO
 {
@@ -19,12 +15,15 @@ namespace BSCore.IO
         public static void Move(String sourceFile, string destinationFolder)
         {
             // Copy first, delete afterwards.
-            string fileName = System.IO.Path.GetFileName(sourceFile);
-            string destFile = System.IO.Path.Combine(destinationFolder, fileName);
-            if (FileIsReady(sourceFile))
+            string fileName = Path.GetFileName(sourceFile);
+            if (fileName != null)
             {
-                //System.IO.File.Copy(sourceFile, destFile, true);
-                System.IO.File.Move(sourceFile, destFile);
+                string destFile = Path.Combine(destinationFolder, fileName);
+                if (FileIsReady(sourceFile))
+                {
+                    //System.IO.File.Copy(sourceFile, destFile, true);
+                    File.Move(sourceFile, destFile);
+                }
             }
         }
 
@@ -54,5 +53,9 @@ namespace BSCore.IO
             }
         }
 
+        public static void BackupFile(string filepath)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

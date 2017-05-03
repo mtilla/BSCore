@@ -9,7 +9,7 @@ namespace BSCore.Log
     /// <summary>
     /// LogEntry class 
     /// </summary>
-    public class LogEntry  : Loggable
+    public class LogEntry : Loggable
     {
     }
 
