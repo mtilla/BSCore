@@ -3,6 +3,7 @@ using BSCore.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using BSCore.IO;
@@ -14,5 +15,6 @@ namespace BSCore
         public ErrorManager ErrorManager { get; set; }
         public LogManager LogManager { get; set; }
         public IOManager IOManager { get; set; }
+        public ServiceManager ServiceManager { get; set; }
     }
 }

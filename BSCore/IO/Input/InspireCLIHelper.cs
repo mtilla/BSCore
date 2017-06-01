@@ -11,7 +11,6 @@ namespace BSCore.IO.Input
     #region InspireCLIHelper
     class InspireCLIHelper : IInputEventHandler
     {
-        //TODO: Create Config Class To encapsulate most of Below
         private InspireWorkflowConfiguration WorkflowConfiguration;
         private LogManager LogManager = new LogManager(new FileLogOutputSource(Environment.CurrentDirectory + "inspirecli.log"));
 

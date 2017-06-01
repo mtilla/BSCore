@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEvent.cs" />
+    <Compile Include="ServiceManager.cs" />
     <Compile Include="Shared\InspireCLILocater.cs" />
     <Compile Include="Log\Loggable.cs" />
     <Compile Include="CoreManager.cs" />

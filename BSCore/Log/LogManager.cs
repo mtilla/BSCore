@@ -2,7 +2,7 @@
 
 namespace BSCore.Log
 {
-    
+    //TODO: CREATE SingleTon Pattern that handles all the logs (use uids/pid to identify the process/service
     public class LogManager
     {
         /// <summary>

@@ -54,4 +54,7 @@ namespace BSCore.Error
 
     //TODO: Implement Error messages
     //TODO: Implement Translation Library
+    //TODO: Implement Custom Exceptions
+
 }
+
